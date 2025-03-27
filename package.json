@@ -1,0 +1,33 @@
+{
+  "name": "04_rodri_node",
+  "module": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Hola mundo\" ",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "serve": "bun dist/index.js",
+    "dev": "nodemon ./src/main.ts",
+    "start": "bun run build && bun run dev",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepare": "husky"
+  },
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@types/bun": "latest",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "prettier": "3.5.3",
+    "typescript-eslint": "^8.28.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.14",
+    "express": "^4.21.2"
+  }
+}
