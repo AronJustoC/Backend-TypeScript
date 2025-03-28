@@ -96,4 +96,22 @@
   },
 ```
 
-6
+- Ahora instalaremos commitlint para que se ejecute el comando hacer
+  de commitlint antes de hacer un commit.
+
+```bash
+bun exec husky add .husky/commit-msg "bunx commitlint --edit"
+```
+
+- Esto añadirá un hook commit-msg a tu proyecto lo que nos servira
+  para hacer commits segun el formato de commitlint.
+
+## **Creacion de CRUD**
+
+1. Crearemos un CRUD con express el orm Mongoose:
+
+   ```bash
+    bun add express mongoose
+   ```
+
+   - Esto añadirá express y mongoose a tu proyecto.
