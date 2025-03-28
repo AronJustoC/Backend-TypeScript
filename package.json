@@ -2,11 +2,10 @@
   "name": "04_rodri_node",
   "module": "index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "bun build ./src/main.ts --target node --outdir ./dist",
     "test": "echo \"Hola mundo\" ",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "serve": "bun dist/index.js",
-    "dev": "nodemon ./src/main.ts",
+    "dev": "bun --watch src/main.ts",
     "start": "bun run build && bun run dev",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "prepare": "husky"
@@ -14,11 +13,14 @@
   "type": "module",
   "private": true,
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.23.0",
     "@types/bun": "latest",
     "eslint": "^9.23.0",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
+    "nodemon": "^3.1.9",
     "prettier": "3.5.3",
     "typescript-eslint": "^8.28.0"
   },

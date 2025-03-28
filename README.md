@@ -65,4 +65,35 @@
 
    - Esto formateará tu código.
 
-6.
+- Ahora instalaremos husky para que se ejecute el comando de prettier antes de hacer un commit.
+
+```bash
+ bun exec husky add .husky/pre-commit "bun exec prettier ./src --write"
+```
+
+- Esto añadirá un hook pre-commit a tu proyecto.
+
+```bash
+  npm run format
+  npm test
+  npm run lint
+  npm run build
+```
+
+- Esto ejecutará los comandos de formateo, pruebas, linting y build.
+- En ves de usar nodemon, podemos usar bun para ejecutar el build y el watch.
+- Nuestro package.json en la parte de scripts:
+
+```json
+"scripts": {
+    "build": "bun build ./src/main.ts --target node --outdir ./dist",
+    "test": "echo \"Hola mundo\" ",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "dev": "bun --watch src/main.ts",
+    "start": "bun run build && bun run dev",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepare": "husky"
+  },
+```
+
+6
