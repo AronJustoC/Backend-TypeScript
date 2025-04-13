@@ -4,7 +4,8 @@ import TodoService from "../services/todo-list.service";
 class TodoController {
   async get(req: Request, res: Response) {
     try {
-      const todos = await TodoService.getAll();
+      const user_id = req.headers.user_id as string;
+      const todos = await TodoService.getAll(user_id);
       res.status(200).json({ data: todos });
     } catch (error) {
       res.status(500).json({ error });
@@ -13,13 +14,16 @@ class TodoController {
 
   async create(req: Request, res: Response) {
     try {
+      const user_id = req.headers.user_id as string;
       const { title, description, done } = req.body;
-      const todo = await TodoService.create({
+      console.log(user_id);
+      const todos = await TodoService.create({
         title,
         description,
-        done,
+        done: done || false,
+        user: user_id,
       });
-      res.status(201).json({ data: todo });
+      res.status(201).json({ data: todos });
     } catch (error) {
       res.status(500).json({ error });
     }
@@ -27,9 +31,10 @@ class TodoController {
 
   async update(req: Request, res: Response) {
     try {
-      const { id } = req.params;
+      const user_id = req.headers.user_id as string;
+      const { id } = req.params as { id: string };
       const { title, description, done } = req.body;
-      const todo = await TodoService.update(id as string, {
+      const todo = await TodoService.update(id, user_id, {
         title,
         description,
         done,
@@ -42,8 +47,9 @@ class TodoController {
 
   async remove(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      await TodoService.remove(id as string);
+      const user_id = req.headers.user_id as string;
+      const { id } = req.params as { id: string };
+      await TodoService.remove(id, user_id);
       res.status(201).json({ data: "ok" });
     } catch (error) {
       res.status(500).json({ error });

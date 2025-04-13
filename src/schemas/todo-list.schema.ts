@@ -1,30 +1,33 @@
-import { Document, Schema, model } from "mongoose";
+import mongoose, { Document, Schema, model } from "mongoose";
 
 export type TTodoList = {
   title: string;
   description: string;
   done: boolean;
+  archived?: boolean;
+  user: string;
 };
 
 export interface ITodoList extends Document, TTodoList {}
 
-const todoListSchema = new Schema(
+export const todoListSchema = new Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     done: {
       type: Boolean,
-      required: true,
     },
     archived: {
       type: Boolean,
       default: false,
+    },
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: "user",
     },
   },
   {
@@ -32,6 +35,6 @@ const todoListSchema = new Schema(
   },
 );
 
-const TodoList = model("TodoList", todoListSchema);
+const TodoList = model("todoList", todoListSchema);
 
 export default TodoList;

@@ -4,6 +4,7 @@ export interface CreateTodoDto {
   title: string;
   description: string;
   done: boolean;
+  user?: string;
 }
 
 class TodoRepository {
@@ -12,31 +13,29 @@ class TodoRepository {
     return await addedTodo.save();
   }
 
-  async findAll() {
-    const result = await TodoModel.find({ archived: false });
+  async findAll(user: string) {
+    const result = await TodoModel.find({ user, archived: false })
+      .populate("user")
+      .exec();
     return result;
   }
 
-  static async findById(id: string) {
-    const todo = await TodoModel.findById(id, { archived: false });
+  async findById(_id: string) {
+    const todo = await TodoModel.findOne({ _id, archived: false });
     return todo;
   }
 
-  async update(_id: string, todoChanges: Partial<CreateTodoDto>) {
+  async update(_id: string, user: string, todoChanges: Partial<CreateTodoDto>) {
     const updatedTodo = await TodoModel.findByIdAndUpdate(
-      { _id },
+      { _id, user },
       { $set: todoChanges },
       { new: true },
     );
     return updatedTodo;
   }
 
-  async delete(_id: string) {
-    const deletedTodo = await TodoModel.findOneAndUpdate(
-      { _id },
-      { archived: true },
-    );
-    return deletedTodo;
+  async delete(_id: string, user: string) {
+    await TodoModel.findOneAndUpdate({ _id, user }, { archived: true });
   }
 }
 

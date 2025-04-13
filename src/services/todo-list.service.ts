@@ -1,21 +1,25 @@
-import TodoRepository from "../repository/todo-list.schema";
-import type { CreateTodoDto } from "../repository/todo-list.schema";
+import TodoRepository from "../repository/todo-list.repository";
+import type { CreateTodoDto } from "../repository/todo-list.repository";
 
 class TodoService {
-  async getAll() {
-    return TodoRepository.findAll();
+  async getAll(user_id: string) {
+    return TodoRepository.findAll(user_id);
+  }
+
+  async getById(_id: string) {
+    return TodoRepository.findById(_id);
   }
 
   async create(createDTO: CreateTodoDto) {
     return TodoRepository.create(createDTO);
   }
 
-  async update(_id: string, updateDTO: Partial<CreateTodoDto>) {
-    return TodoRepository.update(_id, updateDTO);
+  async update(_id: string, user: string, updateDTO: Partial<CreateTodoDto>) {
+    return TodoRepository.update(_id, user, updateDTO);
   }
 
-  async remove(_id: string) {
-    return TodoRepository.delete(_id);
+  async remove(_id: string, user: string) {
+    return TodoRepository.delete(_id, user);
   }
 }
 
