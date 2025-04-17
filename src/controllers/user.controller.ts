@@ -4,8 +4,8 @@ import UserService from "../services/user.service";
 class UserController {
   async get(req: Request, res: Response) {
     try {
-      const todos = await UserService.getAll();
-      res.status(200).json({ data: todos });
+      const users = await UserService.getAll();
+      res.status(200).json({ data: users });
     } catch (error) {
       res.status(500).json({ error });
     }
@@ -14,12 +14,12 @@ class UserController {
   async create(req: Request, res: Response) {
     try {
       const { name, email, password } = req.body;
-      const todo = await UserService.create({
+      const user = await UserService.create({
         name,
         email,
         password,
       });
-      res.status(201).json({ data: todo });
+      res.status(201).json({ data: user });
     } catch (error) {
       res.status(500).json({ error });
     }

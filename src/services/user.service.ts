@@ -12,6 +12,10 @@ class UserService {
     return UserRepository.findById(_id);
   }
 
+  async getByEmail(email: string) {
+    return UserRepository.findByEmail(email);
+  }
+
   async create(createDTO: CreateUserDto) {
     const hashedPassword = await encrypt(createDTO.password);
     return UserRepository.create({ ...createDTO, password: hashedPassword });

@@ -115,3 +115,109 @@ bun exec husky add .husky/commit-msg "bunx commitlint --edit"
    ```
 
    - Esto añadirá express y mongoose a tu proyecto.
+
+## Consultas HTTP utilizando curl
+
+### 🔐 Autenticación (auth.route.ts)
+
+```bash
+# 📝 Registro de usuario
+
+curl -X POST http://localhost:4000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email":"aronchoque727@gmail.com",
+    "password":"123456",
+    "name":"aron02"
+  }' | jq
+
+# 🔐 validate OTP
+curl -X POST http://localhost:4000/auth/validate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email":"aronchoque727@gmail.com",
+    "code":"967058"
+  }' | jq
+
+# 🔑 Resend OTP
+curl -X POST http://localhost:4000/auth/resend_otp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email":"aronchoque727@gmail.com"
+  }' | jq
+
+# 🔑 Login
+curl -X POST http://localhost:4000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email":"aronchoque727@gmail.com",
+    "password": "123456"
+  }' | jq
+
+intento de login:
+
+📧 Verificar OTP
+curl -X POST http://localhost:3000/api/auth/verify-otp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "otp": "123456"
+  }'
+
+```
+
+### 👤 Usuarios (user.controller.ts)
+
+```bash
+# 📋 Obtener todos los usuarios
+curl -X GET http://localhost:3000/api/users \
+  -H "Authorization: Bearer TU_TOKEN"
+
+# 🔍 Obtener usuario por ID
+curl -X GET http://localhost:3000/api/users/:id \
+  -H "Authorization: Bearer TU_TOKEN"
+
+# ✏️ Actualizar usuario
+curl -X PUT http://localhost:3000/api/users/:id \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer TU_TOKEN" \
+  -d '{
+    "firstName": "Juan Actualizado",
+    "lastName": "Perez Actualizado"
+  }'
+
+# ❌ Eliminar usuario
+curl -X DELETE http://localhost:3000/api/users/:id \
+  -H "Authorization: Bearer TU_TOKEN"
+```
+
+### 📝 Todo List (todo-list.route.ts)
+
+```bash
+# 📋 Obtener todas las tareas
+curl -X GET http://localhost:3000/api/todo \
+  -H "Authorization: Bearer TU_TOKEN"
+
+# ➕ Crear nueva tarea
+curl -X POST http://localhost:3000/api/todo \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer TU_TOKEN" \
+  -d '{
+    "title": "Nueva tarea",
+    "description": "Descripción de la tarea",
+    "completed": false
+  }'
+
+# 🔄 Actualizar tarea
+curl -X PUT http://localhost:3000/api/todo/:id \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer TU_TOKEN" \
+  -d '{
+    "title": "Tarea actualizada",
+    "completed": true
+  }'
+
+# ❌ Eliminar tarea
+curl -X DELETE http://localhost:3000/api/todo/:id \
+  -H "Authorization: Bearer TU_TOKEN"
+```
