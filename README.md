@@ -221,3 +221,23 @@ curl -X PUT http://localhost:3000/api/todo/:id \
 curl -X DELETE http://localhost:3000/api/todo/:id \
   -H "Authorization: Bearer TU_TOKEN"
 ```
+
+## Testing
+
+- Librerias necesarias:
+
+```bash
+  bun add jest supertest ts-jest @types/jest @types/supertest mongodb-memory-server
+```
+
+jest: Es como tu caja de herramientas principal para testing. El framework base que te permite armar todas tus pruebas. Como tener tu maleta de herramientas básicas.
+
+supertest: Es como tu banco de pruebas para APIs. Te permite simular peticiones HTTP sin necesidad de tener el servidor corriendo. Como hacer pruebas en un motor sin tener que instalarlo en el carro.
+
+ts-jest: Es el adaptador que permite que Jest trabaje con TypeScript. Como un convertidor que permite que tus herramientas normales trabajen con materiales especiales.
+
+@types/jest: Son los planos y especificaciones de TypeScript para Jest. Te da el autocompletado y la documentación de tipos.
+
+@types/supertest: Similar al anterior, son los planos pero para Supertest. La documentación de tipos para trabajar con TypeScript.
+
+mongodb-memory-server: Es como tener una base de datos de prueba que vive solo en memoria. Como armar una maqueta temporal para probar - cuando terminas las pruebas, se desmonta todo sin dejar rastro.

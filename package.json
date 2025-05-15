@@ -2,8 +2,8 @@
   "name": "04_rodri_node",
   "module": "index.ts",
   "scripts": {
+    "test": "jest",
     "build": "bun build ./src/main.ts --target node --outdir ./dist",
-    "test": "echo \"Hola mundo\" ",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "dev": "bun --watch src/main.ts",
     "start": "bun run build && bun run dev",
@@ -26,18 +26,25 @@
     "mock-aws-s3": "^4.0.2",
     "nock": "^14.0.3",
     "prettier": "3.5.3",
+    "ts-node": "^10.9.2",
     "typescript-eslint": "8.28.0"
   },
   "dependencies": {
     "@types/express": "4.17.21",
+    "@types/jest": "^29.5.14",
+    "@types/supertest": "^6.0.3",
     "bcrypt": "^5.1.1",
     "body-parser": "^2.2.0",
     "dotenv": "^16.5.0",
     "express": "4.18.2",
     "express-rate-limit": "^7.5.0",
+    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
+    "mongodb-memory-server": "^10.1.4",
     "mongoose": "^8.13.0",
     "resend": "^4.3.0",
+    "supertest": "^7.1.0",
+    "ts-jest": "^29.3.2",
     "zod": "^3.24.2"
   }
 }
