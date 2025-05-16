@@ -1,3 +1,6 @@
+import process from "process";
+process.env.RESEND_KEY = "fake_api_key_for_tests";
+
 import request from "supertest";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
