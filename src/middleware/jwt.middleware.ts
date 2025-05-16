@@ -15,7 +15,6 @@ export async function validateToken(
     if (!token) {
       return res.status(401).json({ error: "Token inválido" });
     }
-
     const user = (await ValidateToken(token)) as { _id: string };
     if (!user) {
       return res.status(403).json({ error: "Usuario no autenticado" });
