@@ -7,7 +7,12 @@ export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
     files: ["**/*.{js,mjs,cjs,ts}"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest, // Agregamos los globals de Jest
+      },
+    },
   },
   {
     files: ["**/*.{js,mjs,cjs,ts}"],

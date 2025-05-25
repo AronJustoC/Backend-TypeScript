@@ -8,10 +8,13 @@
     "jsx": "react-jsx",
     "allowJs": true,
 
+    // Type routes
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+
     // Bundler mode
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "noEmit": false,
     "outDir": "./dist",
 
@@ -24,6 +27,10 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+
+    // ** Agregar estas dos líneas **
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }
