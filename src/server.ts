@@ -5,6 +5,7 @@ import AuthRoutes from "./routes/auth.route";
 import bodyParser from "body-parser";
 import { rateLimit } from "express-rate-limit";
 import { validateToken } from "./middleware/jwt.middleware";
+import corsMiddleware from "./middleware/cors.middleware";
 import errorHandler from "./middleware/errorHandler.middleware";
 
 const limiter = rateLimit({
@@ -16,6 +17,7 @@ const limiter = rateLimit({
 
 export default function CreateServer() {
   const app = express();
+  app.use(corsMiddleware);
   app.disable("x-powered-by");
   app.use(bodyParser.json());
   app.use(limiter);

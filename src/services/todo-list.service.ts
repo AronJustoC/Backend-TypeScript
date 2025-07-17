@@ -2,8 +2,12 @@ import TodoRepository from "../repository/todo-list.repository";
 import type { CreateTodoDto } from "../repository/todo-list.repository";
 
 class TodoService {
-  async getAll(user_id: string) {
-    return TodoRepository.findAll(user_id);
+  async getCountItems(user_id: string) {
+    return TodoRepository.getCountItems(user_id);
+  }
+
+  async getAll(user_id: string, page: number) {
+    return TodoRepository.findAll(user_id, page);
   }
 
   async getById(_id: string) {

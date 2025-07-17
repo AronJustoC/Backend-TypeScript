@@ -13,9 +13,19 @@ class TodoRepository {
     return await addedTodo.save();
   }
 
-  async findAll(user: string) {
+  async getCountItems(user: string) {
+    const result = await TodoModel.find({
+      user,
+      archived: false,
+    }).countDocuments();
+    return result;
+  }
+
+  async findAll(user: string, page: number) {
     const result = await TodoModel.find({ user, archived: false })
       .populate("user")
+      .skip(page * 10)
+      .limit(10)
       .exec();
     return result;
   }

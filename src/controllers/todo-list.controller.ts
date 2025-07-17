@@ -17,6 +17,7 @@ class TodoController {
 
   async get(req: Request, res: Response) {
     try {
+      const { page } = req.query as { page: string };
       const client = await redisServer.createServer();
       const todosCache = await client.get("todoList");
       if (todosCache) {
@@ -25,9 +26,15 @@ class TodoController {
         return;
       }
       const user_id = req.headers.user_id as string;
-      const todos = await TodoService.getAll(user_id);
+      const todos = await TodoService.getAll(user_id, parseInt(page ?? "0"));
+      const total_items = await TodoService.getCountItems(user_id);
+      const metadata = {
+        page: page,
+        total_items,
+        total_pages: total_items / 10,
+      };
       await client.set("todoList", JSON.stringify(todos));
-      res.status(200).json({ data: todos });
+      res.status(200).json({ cache: false, data: todos, metadata });
     } catch (error) {
       res.status(500).json({ error });
     }
