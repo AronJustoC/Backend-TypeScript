@@ -53,7 +53,7 @@ class UserController {
   async getTodosByUser(req: Request, res: Response) {
     try {
       const user_id = req.headers.user_id as string;
-      console.log({ user_id });
+      //console.log({ user_id });
       const todos = await UserService.getTodosByUser(user_id);
       res.status(200).json({ data: todos });
     } catch (error) {

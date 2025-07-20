@@ -32,9 +32,15 @@ class TodoController {
         page: page,
         total_items,
         total_pages: total_items / 10,
+        nextCursor: page + 1,
       };
       await client.set("todoList", JSON.stringify(todos));
-      res.status(200).json({ cache: false, data: todos, metadata });
+      res.status(200).json({
+        cache: false,
+        data: todos,
+        metadata,
+        nextCursor: parseInt(page ?? "0") + 1,
+      });
     } catch (error) {
       res.status(500).json({ error });
     }
